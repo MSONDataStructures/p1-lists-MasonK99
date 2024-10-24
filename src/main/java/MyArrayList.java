@@ -34,7 +34,22 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public void addLast(Integer item) {
-        // TODO: your code goes here
+            if (item == null) {
+                throw new NullPointerException();
+            }
+
+            if (size == list.length) {
+                resize();  // Expands the array
+            }
+            list[size] = item;
+            size++;
+        }
+
+        private void resize() {
+            Integer[] newList = new Integer[list.length * 2];
+            System.arraycopy(list, 0, newList, 0, list.length);
+            list = newList;
+        }
     }
 
     /**
@@ -46,7 +61,20 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public void add(int index, Integer item) {
-        // TODO: your code goes here
+        if (item == null) {
+            throw new NullPointerException();
+        }
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (size == list.length) {
+            resize();
+        }
+
+        System.arraycopy(list, index, list, index + 1, size - index);
+        list[index] = item;
+        size++;
     }
 
     /**
