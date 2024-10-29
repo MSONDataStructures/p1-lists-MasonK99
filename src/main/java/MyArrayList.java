@@ -16,16 +16,15 @@
  * and you will need to throw the <code>NullPointerException</code> in places
  * as specified in the Javadoc and the JUnit <code>MyArrayListTest</code> class.
  */
-public class MyArrayList
+public class MyArrayList()
 {
     private Integer[] list;
-
+    private int size = 10;
     /**
      * Constructs an empty list with an initial capacity of ten.
      */
     public MyArrayList() {
-        list = new Integer[10];
-        // TODO: you can add code here
+        list = new Integer[size];
     }
 
     /**
@@ -34,15 +33,11 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public void addLast(Integer item) {
-            if (item == null) {
-                throw new NullPointerException();
-            }
-
-            if (size == list.length) {
-                resize();  // Expands the array
-            }
-            list[size] = item;
+        if (item == null) {
+            throw new NullPointerException();
+        }
             size++;
+            list[size] = item;
         }
 
         private void resize() {
@@ -50,7 +45,7 @@ public class MyArrayList
             System.arraycopy(list, 0, newList, 0, list.length);
             list = newList;
         }
-    }
+
 
     /**
      * Inserts the specified Integer at the specified position in this list.
@@ -85,7 +80,13 @@ public class MyArrayList
      */
     public Integer remove(int index) {
         // TODO: modify the code here
-        return null;
+        int hold = list[index];
+        list[index].remove(index);
+        for(int i = index; i < list.size - 1; i++){
+            list.set(i, list.get(i+1));
+        }
+        list.remove(size -1);
+        return hold;
     }
 
     /**
@@ -95,7 +96,7 @@ public class MyArrayList
      */
     public Integer get(int index) {
         // TODO: modify the code here
-        return null;
+        return list[index];
     }
 
     /**
@@ -107,6 +108,10 @@ public class MyArrayList
      */
     public void set(int index, Integer item) {
         // TODO: your code goes here
+        if(item == null){
+            throw new NullPointerException();
+        }
+        list[index] = item;
     }
 
     /**
@@ -115,7 +120,7 @@ public class MyArrayList
      */
     public int size() {
         // TODO: modify the code here
-        return 0;
+        return size;
     }
 
     /**
@@ -128,7 +133,16 @@ public class MyArrayList
      */
     public int indexOf(Integer item) {
         // TODO: modify the code here
-        return 0;
+        if(item == null){
+            throw new NullPointerException();
+        }
+        int x = 0;
+        for(int i = 0; i < list.size; i++){
+           if(list[i] == item){
+               x = i;
+           }
+        }
+        return i;
     }
 
     /**
@@ -139,6 +153,12 @@ public class MyArrayList
      */
     public boolean contains(Integer item) {
         // TODO: modify the code here
+        for(int i = 0; i < list.size; i++){
+            if(list[i] == item){
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -148,6 +168,9 @@ public class MyArrayList
      */
     public void clear() {
         // TODO: your code goes here
+        for(int i = 0; i < list.size(); i++){
+            list[i] = null;
+        }
     }
 
     /**
@@ -156,6 +179,12 @@ public class MyArrayList
      */
     public boolean isEmpty() {
         // TODO: modify the code here
-        return false;
+        for(int i = 0; i < list.size(); i++){
+            if(list[i] != null){
+                return false;
+            }
+        }
+
+        return true;
     }
 }
