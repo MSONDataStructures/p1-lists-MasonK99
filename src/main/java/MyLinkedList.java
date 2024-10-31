@@ -171,7 +171,20 @@ public class MyLinkedList
      */
     public int indexOf(Integer item) {
         // TODO: modify the code here
-        return 0;
+        if (item == null) {
+            throw new NullPointerException();
+        }
+        Node current = first;
+        int index = 0;
+
+        while (current != null) {
+            if (current.value.equals(item)) {
+                return index;
+            }
+            current = current.next;
+            index++;
+        }
+        return -1;
     }
 
     /**
@@ -182,8 +195,19 @@ public class MyLinkedList
      */
     public boolean contains(Integer item) {
         // TODO: modify the code here
+        if (item == null) {
+            throw new NullPointerException();
+        }
+        Node current = first;
+        while (current != null) {
+            if (current.value.equals(item)) {
+                return true;
+            }
+            current = current.next;
+        }
         return false;
     }
+
 
     /**
      * Removes all the elements from this list. The list will be empty after this

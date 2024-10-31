@@ -16,8 +16,7 @@
  * and you will need to throw the <code>NullPointerException</code> in places
  * as specified in the Javadoc and the JUnit <code>MyArrayListTest</code> class.
  */
-public class MyArrayList()
-{
+public class MyArrayList(){
     private Integer[] list;
     private int size = 10;
     /**
@@ -81,11 +80,12 @@ public class MyArrayList()
     public Integer remove(int index) {
         // TODO: modify the code here
         int hold = list[index];
-        list[index].remove(index);
-        for(int i = index; i < list.size - 1; i++){
-            list.set(i, list.get(i+1));
+        if(index == size -1){
+            size--;
         }
-        list.remove(size -1);
+        for(int i = index; i < size - 1; i++){
+            list[i] = list[i+1];
+        }
         return hold;
     }
 
@@ -137,12 +137,12 @@ public class MyArrayList()
             throw new NullPointerException();
         }
         int x = 0;
-        for(int i = 0; i < list.size; i++){
+        for(int i = 0; i < size; i++){
            if(list[i] == item){
                x = i;
            }
         }
-        return i;
+        return x;
     }
 
     /**
@@ -168,7 +168,7 @@ public class MyArrayList()
      */
     public void clear() {
         // TODO: your code goes here
-        for(int i = 0; i < list.size(); i++){
+        for(int i = 0; i < size; i++){
             list[i] = null;
         }
     }
@@ -179,7 +179,7 @@ public class MyArrayList()
      */
     public boolean isEmpty() {
         // TODO: modify the code here
-        for(int i = 0; i < list.size(); i++){
+        for(int i = 0; i < size; i++){
             if(list[i] != null){
                 return false;
             }
